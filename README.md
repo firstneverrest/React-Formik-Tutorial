@@ -49,3 +49,30 @@ const EmailForm = () => {
 
 export default EmailForm;
 ```
+
+## Form Validation
+
+Use validate prop to validate your input fields.
+
+```js
+const validate = (values) => {
+  let errors = {};
+
+  if (!values.name) {
+    errors.name = 'Required';
+  }
+
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+  return errors;
+};
+
+const formik = useFormik({
+  initialValues: initialValues,
+  onSubmit: onSubmit,
+  validate: validate,
+});
+```
