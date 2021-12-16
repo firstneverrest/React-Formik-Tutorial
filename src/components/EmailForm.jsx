@@ -1,5 +1,5 @@
-import react from 'react';
 import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const initialValues = {
   name: '',
@@ -10,26 +10,16 @@ const onSubmit = (values) => {
   console.log(values);
 };
 
-const validate = (values) => {
-  let errors = {};
-
-  if (!values.name) {
-    errors.name = 'Required';
-  }
-
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
-  }
-  return errors;
-};
+const validationSchema = yup.object({
+  name: yup.string().required('Required'),
+  email: yup.string().email('Invalid email address').required('Required'),
+});
 
 const EmailForm = () => {
   const formik = useFormik({
-    initialValues: initialValues,
-    onSubmit: onSubmit,
-    validate: validate,
+    initialValues,
+    onSubmit,
+    validationSchema,
   });
 
   const isNameValidated = formik.touched.name && formik.errors.name;
