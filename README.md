@@ -234,3 +234,47 @@ Formik provides `formik.getFieldProps('')` to reduce code in input field.
   {...formik.getFieldProps('email')}
 />;
 ```
+
+## Husky
+
+Husky provide git hook used to run test or linting before and after doing git command. For example, running test or linting before commit.
+
+### Installation
+
+1. Install husky
+
+```
+npm install husky -D
+```
+
+2. edit package.json to set up husky script
+
+```
+npm set-script prepare "husky install"
+npm run prepare
+```
+
+3. add a hook
+
+```
+npx husky add .husky/pre-commit "npm test"
+git add .husky/pre-commit
+```
+
+4. make a commit
+
+```
+git commit -m "feat: add husky hook"
+```
+
+Tip: you maybe encounter the problem that after running test with Jest, it doesn't exit from testing. So, you need to edit husky.sh hook file like below:
+
+```
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npm test -- --watchAll=false
+
+```
+
+Add `-- --watchAll=false` after `npm test`
