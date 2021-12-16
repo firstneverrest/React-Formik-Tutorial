@@ -188,3 +188,25 @@ After creating form validation, the behavior is when the user fill in the first 
   ) : null;
 }
 ```
+
+## Schema Validation with Yup
+
+Yup is a JavaScript schema builder for value parsing and validation. Instead of writing your own validation, use Yup to handle that.
+
+```js
+import * as yup from 'yup';
+
+const validationSchema = yup.object({
+  name: yup.string().required('Required'),
+  email: yup.string().email('Invalid email address').required('Required'),
+});
+
+...
+
+const formik = useFormik({
+  initialValues,
+  onSubmit,
+  validationSchema, // instead of validate
+});
+
+```
