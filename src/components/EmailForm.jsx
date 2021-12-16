@@ -1,4 +1,4 @@
-import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 
 const initialValues = {
@@ -16,53 +16,29 @@ const validationSchema = yup.object({
 });
 
 const EmailForm = () => {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validationSchema,
-  });
-
-  const isNameValidated = formik.touched.name && formik.errors.name;
-  const isEmailValidated = formik.touched.email && formik.errors.email;
-
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <h2>Email Form</h2>
-      <section>
-        <label htmlFor="name" className={isNameValidated ? 'error-label' : ''}>
-          Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          className={isNameValidated ? 'error-input' : ''}
-          {...formik.getFieldProps('name')}
-        />
-        {isNameValidated ? (
-          <p className="error-msg">{formik.errors.name}</p>
-        ) : null}
-      </section>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={onSubmit}
+    >
+      <Form>
+        <h2>Email Form</h2>
+        <section>
+          <label htmlFor="name">Name</label>
+          <Field type="text" name="name" />
+          <ErrorMessage name="name" component="p" className="error-msg" />
+        </section>
 
-      <section>
-        <label
-          htmlFor="email"
-          className={isEmailValidated ? 'error-label' : ''}
-        >
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          className={isEmailValidated ? 'error-input' : ''}
-          {...formik.getFieldProps('email')}
-        />
-        {isEmailValidated ? (
-          <p className="error-msg">{formik.errors.email}</p>
-        ) : null}
-      </section>
+        <section>
+          <label htmlFor="email">Email</label>
+          <Field type="email" name="email" />
+          <ErrorMessage name="email" component="p" className="error-msg" />
+        </section>
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
   );
 };
 
