@@ -36,9 +36,7 @@ const EmailForm = () => {
           type="text"
           name="name"
           className={isNameValidated ? 'error-input' : ''}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.name}
+          {...formik.getFieldProps('name')}
         />
         {isNameValidated ? (
           <p className="error-msg">{formik.errors.name}</p>
@@ -56,9 +54,7 @@ const EmailForm = () => {
           type="email"
           name="email"
           className={isEmailValidated ? 'error-input' : ''}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
+          {...formik.getFieldProps('email')}
         />
         {isEmailValidated ? (
           <p className="error-msg">{formik.errors.email}</p>
