@@ -210,3 +210,27 @@ const formik = useFormik({
 });
 
 ```
+
+## Refactoring Input Props
+
+Formik provides `formik.getFieldProps('')` to reduce code in input field.
+
+```js
+// old way
+<input
+  type="email"
+  name="email"
+  className={formik.errors.email ? 'error-input' : ''}
+  onChange={formik.handleChange}
+  onBlur={formik.handleBlur}
+  value={formik.values.email}
+/>;
+
+// new way (replace three line of code)
+<input
+  type="email"
+  name="email"
+  className={isEmailValidated ? 'error-input' : ''}
+  {...formik.getFieldProps('email')}
+/>;
+```
