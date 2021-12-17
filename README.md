@@ -6,6 +6,13 @@ Formik helps you build forms in React. Visit more information on [official websi
 - Validation and error messages
 - Handling form submission
 
+## Technologies
+
+![image](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![image](https://img.shields.io/badge/Formik-276DC3?style=for-the-badge&logoColor=white)
+![image](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![image](https://img.shields.io/badge/Husky-42b983?style=for-the-badge&logoColor=white)
+
 ## Installation
 
 ```
