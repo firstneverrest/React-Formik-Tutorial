@@ -242,6 +242,29 @@ Formik provides `formik.getFieldProps('')` to reduce code in input field.
 />;
 ```
 
+## Rendering other components inside Formik component
+
+```js
+<section>
+  <label htmlFor="name">Name</label>
+  <Field type="text" id="name" name="name" placeholder="Your Name" />
+  <ErrorMessage name="name" component={TextError} />
+</section>
+
+<section>
+  <label htmlFor="email">Email</label>
+  <Field
+    type="email"
+    id="email"
+    name="email"
+    placeholder="demo@example.com"
+  />
+  <ErrorMessage name="email">
+    {(error) => <div className="error-label">{error}</div>}
+  </ErrorMessage>
+</section>
+```
+
 ## Husky
 
 Husky provide git hook used to run test or linting before and after doing git command. For example, running test or linting before commit.
