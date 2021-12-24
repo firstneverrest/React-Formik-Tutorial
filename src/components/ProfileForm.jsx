@@ -1,6 +1,6 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FastField } from 'formik';
 import TextError from './TextError';
-import * as yup from 'yup';
+import * as Yup from 'yup';
 
 const initialValues = {
   name: '',
@@ -13,12 +13,15 @@ const onSubmit = (values) => {
   console.log(values);
 };
 
-const validationSchema = yup.object({
-  name: yup.string().required('Required'),
-  email: yup.string().email('Invalid email address').required('Required'),
+const validationSchema = Yup.object({
+  name: Yup.string().required('Name is Required'),
+  email: Yup.string()
+    .email('Invalid email address')
+    .required('Email is Required'),
+  comment: Yup.string().required('Comment is Required'),
 });
 
-const EmailForm = () => {
+const ProfileForm = () => {
   return (
     <Formik
       initialValues={initialValues}
@@ -49,12 +52,15 @@ const EmailForm = () => {
         <section>
           <label htmlFor="comment">Comment</label>
           <Field id="comment" name="comment" as="textarea" />
+          <ErrorMessage name="comment" component={TextError} />
         </section>
 
         <section>
           <label htmlFor="address">Address</label>
-          <Field name="address">
+          <FastField name="address">
             {({ field, form, meta }) => {
+              console.log('rendered');
+
               return (
                 <div>
                   <input type="text" id="address" {...field} />
@@ -62,7 +68,7 @@ const EmailForm = () => {
                 </div>
               );
             }}
-          </Field>
+          </FastField>
         </section>
 
         <button type="submit">Submit</button>
@@ -71,4 +77,4 @@ const EmailForm = () => {
   );
 };
 
-export default EmailForm;
+export default ProfileForm;

@@ -1,9 +1,11 @@
-import EmailForm from './components/EmailForm';
+import ProfileForm from './components/ProfileForm';
+import SocialForm from './components/SocialForm';
 
 function App() {
   return (
     <div className="App">
-      <EmailForm />
+      <ProfileForm />
+      <SocialForm />
     </div>
   );
 }
